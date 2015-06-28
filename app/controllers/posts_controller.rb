@@ -1,11 +1,12 @@
-class PostsController < ApplicationController
+class PostsController < ApplicationController 
+  before_action :confirm_logged_in, except: [:create, :update, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :confirm_logged_in
-
+  
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = current_user.posts.all
+    flash[:notice] = "Logged in as #{current_user.name}"
   end
 
   # GET /posts/1
@@ -26,7 +27,8 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-
+    @post.user = current_user
+    
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -65,7 +67,11 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      if Post.find(params[:id]).user == current_user
+        @post = Post.find(params[:id])
+      else
+        redirect_to posts_url, notice: "You don't have enough credentials to view post(#{params[:id]})"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
