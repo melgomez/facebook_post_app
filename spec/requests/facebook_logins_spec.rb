@@ -6,9 +6,7 @@ RSpec.describe "Facebook Authentication", type: :request do
     it "displays user_id when successful" do
       mock_auth_hash
       visit 'auth/facebook'
-
-      expect(current_url).to eq( posts_url )
-      # expect(page).to have_content("Logged in user_id: 1")
+      expect(page).to have_content("Mel Gomez")
     end
 
     it "should add new post" do

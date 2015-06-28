@@ -4,7 +4,7 @@ module OmniauthMacros
       'provider'  =>  'facebook',
       'uid'       =>  1,
       'info' =>  {
-        'name'  =>  'Mel Gomez'
+        'name'  =>  'Mel Gomez from Facebook'
       },
       'credentials' =>  {
         'token' =>  'CAAT0XFY4RG8BAIiUWxkZAsYNgfIRJoGqKXbbxNHdSkhBtVBrnOkURKL80U9UYuPFvK3hkDoM3ziNH6ZBzEDNrozsKwlmqRfY4CNsuXG8fhZA5zLFpKNveLWj8kNIH8zSy8MBf91vOqh8XDAshtEECBOKtDZB46wlgOTJxZC5J1oA2p3iQbvXpnDr7RNG9BhpSxO3bEJdw49OMLFohdgMX',
