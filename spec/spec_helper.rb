@@ -22,6 +22,7 @@ require File.expand_path("../../config/environment", __FILE__)
 
 require 'rspec/rails'
 require 'capybara/rspec'
+require 'database_cleaner'
 
 Dir["./spec/support/*.rb"].each {|file| require file }
 
@@ -95,10 +96,24 @@ RSpec.configure do |config|
 =end
   
   config.include Capybara::DSL
+  
+  config.use_transactional_fixtures = false
 
   config.include(OmniauthMacros)
+  
+  config.include(PostCrudMaros)
 
   config.before(:each) { mock_auth_hash_reset }
+  
+  config.include FactoryGirl::Syntax::Methods
+
+  config.after :each do
+    DatabaseCleaner.clean_with :truncation
+    FactoryGirl.reload
+  end
+  
+  config.include ControllerHelpers, :type => :controller
+  
 end
 
 OmniAuth.config.test_mode = true
