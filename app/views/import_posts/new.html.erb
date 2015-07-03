@@ -1,0 +1,6 @@
+<h1>Import Posts</h1>
+<%= form_for @import_post do |f| %>
+<%= f.file_field :file %>
+<%= f.hidden_field :user_id, :value => User.find(session[:user_id]).oauth_token %>
+<%= f.submit "Import" %>
+<% end %>
