@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'home/index'
 
   resources :posts
+  resources :import_posts
 
   match 'auth/:provider/callback', to: 'sessions#create', as: 'signin', via: :get
   match 'auth/failure', to: redirect('/'), via: :get
