@@ -1,9 +1,12 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
 
   root 'home#index'
 
   get 'home/index'
-
+  mount Sidekiq::Web, at: "/sidekiq"
+  
   resources :posts
   resources :import_posts
 
